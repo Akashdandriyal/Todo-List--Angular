@@ -1,0 +1,35 @@
+<div>
+  <h1 class="title">Todo List</h1>
+  <div class="container">
+    <div class="container-left">
+      <mat-checkbox class="all-completed-checkbox"
+        [checked]="allComplete"
+        color="primary"
+        [indeterminate]="someComplete()"
+        (change)="setAll($event.checked)">
+        All Completed
+      </mat-checkbox>
+      <div class="item" *ngFor="let item of data">
+        <app-items 
+          [item]="item" 
+          (deleteItemEvent)="deleteItem($event)"
+          (updateItemEvent)="updateItem($event)"
+          (addSubItemEvent)="addSubItem($event)"
+        >
+        </app-items>
+      </div>
+    </div>
+    <div class="container-right">
+      <form #form="ngForm" (ngSubmit)="addItem(form)">
+        <mat-form-field appearance="outline">
+          <mat-label>New Item</mat-label>
+          <input matInput placeholder="Enter Item" name="newItem" ngModel required>
+          <mat-hint>Hint: Complete Homework</mat-hint>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" class="add-item" [disabled]="!form.form.valid">Add Item <mat-icon>add_circle_outline</mat-icon></button>
+      </form>
+      
+    </div>
+  </div>
+  
+</div>

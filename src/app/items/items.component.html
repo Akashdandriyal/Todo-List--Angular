@@ -1,0 +1,35 @@
+<div class="item-content">
+  <mat-checkbox 
+    [checked]="item.completed"
+    color="primary"
+    [indeterminate]="someComplete()"
+    (change)="setAll($event.checked)"
+  >
+    
+  </mat-checkbox>
+  <p *ngIf="!edit" (click)="editItem()" title="Edit" [ngStyle]="{'text-decoration': (item.completed == true) ? 'line-through' : 'none'}">{{item.value}}</p>
+  <input *ngIf="edit" type="text" [(ngModel)]="item.value" autofocus (blur)="saveEdit()">
+  <div class="item-actions">
+    <mat-icon color="primary" title="Add Item" (click)="addItem()">create</mat-icon>
+    <mat-icon color="warn" (click)="deleteItem(item)" title="Delete" style="cursor: pointer;">delete</mat-icon>
+  </div>
+  <form *ngIf="subItem" #form="ngForm" (ngSubmit)="addSubItem(form)" style="margin-top: 15px; display: flex;">
+      <input matInput placeholder="Enter Item" name="newSubItem" ngModel required>
+      <button type="submit" mat-raised-button color="primary" class="add-sub-item" [disabled]="!form.form.valid">Add Sub Item <mat-icon>add_circle_outline</mat-icon></button>
+  </form>
+  <div *ngIf="item.child">
+    <ul class="sub-items">
+      <li *ngFor="let subItem of item.child" [ngStyle]="{'text-decoration': (subItem.completed == true) ? 'line-through' : 'none'}">
+        <mat-checkbox 
+          [(ngModel)]="subItem.completed"
+          color="primary"
+          (change)="setChild()"
+        >
+        </mat-checkbox>
+        {{subItem.value}} 
+        <mat-icon color="warn" class="delete-sub-item" (click)="deleteSubItem(subItem)" title="Delete" style="cursor: pointer;">delete</mat-icon>
+      </li>
+    </ul>
+  </div>
+</div>
+<mat-divider></mat-divider>

@@ -1,0 +1,42 @@
+
+.title {
+    text-align: center;
+    color: #673ab7;
+    padding-top: 30px;
+}
+
+.container-left {
+    width: 60vw;
+    padding: 50px;
+}
+
+.container-right > form {
+    position: fixed;
+    width: 30vw;
+    top: 150px;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.all-completed-checkbox {
+    margin-top: 50px;
+}
+
+.container-right > form > button {
+    margin-top: 20px;
+}
+
+.add-item {
+    display: block;
+}
+
+.item {
+    position: relative;
+}
+
+.item:hover {
+    background-color: rgb(206, 203, 203);
+}
+
